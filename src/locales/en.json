@@ -1,0 +1,19 @@
+{
+  "DEFAULT_ERRORS": {
+    "AUTHENTICATION_FAILED": "Please login to access this resource.",
+    "INTERNAL_SERVER_ERROR": "Internal server error. Please try again later.",
+    "LOGIN_AUTHENTICATION_FAILED": "Invalid credentials. Please check your email and password and try again.",
+    "RESOURCE_NOT_FOUND": "Requested resource not found.",
+    "VALIDATION_FAILED": "Validation failed. Please modify the request and try again."
+  },
+  "VALIDATION_ERRORS": {
+    "INVALID_EMAIL": "Please specify valid email address",
+    "INVALID_FIRSTNAME": "Please specify first name.",
+    "INVALID_LASTNAME": "Please specify last name.",
+    "PASSWORD_MISSING": "Please provide a password.",
+    "DUPLICATE_EMAIL": "The email you provided is already taken. Please provide a different one."
+  },
+  "MESSAGES": {
+    "HEALTHCHECK": "OK"
+  }
+}

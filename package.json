@@ -1,0 +1,73 @@
+{
+  "name": "boilerplate-backend",
+  "version": "1.0.0",
+  "description": "Boilerplate Application",
+  "main": "./dist/server/server",
+  "scripts": {
+    "build": "gulp build",
+    "start": "node ./dist/server/server",
+    "lint": "tslint --fix -c tslint.json src/**/*.ts test/**/*.ts",
+    "heroku-postbuild": "npm run build",
+    "heroku-start": "node ./dist/server/server",
+    "test": "NODE_ENV=testing mocha --exit -r ts-node/register --project tsconfig.json test/**/*.spec.ts",
+    "serve": "gulp serve"
+  },
+  "author": "",
+  "license": "private",
+  "dependencies": {
+    "bcrypt": "^3.0.7",
+    "body-parser": "^1.19.0",
+    "config": "^3.2.5",
+    "crypto-random-string": "^3.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.4.0",
+    "express-winston": "^4.0.2",
+    "i18n": "^0.8.5",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "module-alias": "^2.2.2",
+    "mongoose": "5.8.11",
+    "typescript": "^3.7.5",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/body-parser": "^1.17.1",
+    "@types/chai": "^4.2.11",
+    "@types/chai-http": "^4.2.0",
+    "@types/chai-spies": "^1.0.1",
+    "@types/config": "0.0.36",
+    "@types/express": "^4.17.2",
+    "@types/i18n": "^0.8.6",
+    "@types/jsonwebtoken": "^8.3.7",
+    "@types/lodash": "^4.14.150",
+    "@types/mocha": "^7.0.2",
+    "@types/mongoose": "5.7.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "chai-spies": "^1.0.0",
+    "gulp": "^4.0.0",
+    "gulp-nodemon": "^2.5.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "mocha": "^7.1.2",
+    "mongodb-memory-server": "^6.6.0",
+    "ts-node": "^8.10.1",
+    "tslint": "^6.1.1",
+    "tslint-config-airbnb": "^5.11.2"
+  },
+  "engines": {
+    "npm": "6.13.4",
+    "node": "12.14.1"
+  },
+  "_moduleAliases": {
+    "@controllers": "dist/controllers",
+    "@helpers": "dist/helpers",
+    "@models": "dist/models",
+    "@middleware": "dist/middleware",
+    "@server": "dist/server",
+    "@services": "dist/services",
+    "@storage": "dist/storage",
+    "@typings": "dist/typings",
+    "@validators": "dist/validators"
+  }
+}

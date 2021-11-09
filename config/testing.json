@@ -1,0 +1,8 @@
+{
+  "jwt": {
+    "key": "secret-key-for-jwt-signing"
+  },
+  "www": {
+    "port": 4200
+  }
+}

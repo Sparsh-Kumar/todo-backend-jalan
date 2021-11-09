@@ -1,0 +1,22 @@
+{
+  "name": "boilerplate-backend",
+  "env": {
+    "MONGODB_URI": {
+      "description": "Connection string to connect to MongoDB database",
+      "required": true
+    },
+    "NODE_ENV": {
+      "description": "Node environment",
+      "required": true
+    },
+    "NODE_CONFIGENV": {
+      "description": "Configuration environment",
+      "required": true
+    },
+    "JWT_SECRET_KEY": {
+      "description": "Secret key to encode/decode JWT token",
+      "generator": "secret",
+      "required": true
+    }
+  }
+}

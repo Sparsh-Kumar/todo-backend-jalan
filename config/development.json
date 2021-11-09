@@ -1,0 +1,14 @@
+{
+  "jwt": {
+    "key": "secret-key-for-jwt-signing"
+  },
+  "logger": {
+    "console": true
+  },
+  "mongoDb": {
+    "uri": "mongodb://localhost:27017/boilerplate-development"
+  },
+  "www": {
+    "port": 4200
+  }
+}

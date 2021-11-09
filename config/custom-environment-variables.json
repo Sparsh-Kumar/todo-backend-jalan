@@ -1,0 +1,11 @@
+{
+  "jwt": {
+    "key": "JWT_SECRET_KEY"
+  },
+  "mongoDb": {
+    "uri": "MONGODB_URI"
+  },
+  "www": {
+    "port": "PORT"
+  }
+}
