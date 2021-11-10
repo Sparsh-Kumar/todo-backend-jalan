@@ -34,7 +34,6 @@ export class TodoController extends BaseController {
         res: Response,
         next: NextFunction,
     ) => {
-
         const failures: ValidationFailure[] = Validation.extractValidationErrors(
             req,
         );
@@ -45,11 +44,9 @@ export class TodoController extends BaseController {
             );
             return next(valError);
         }
-
         const { title } = req.body;
         const todo = await this.appContext.todoRepository.save(new Todo ({ title }) );
         return res.status(201).json(todo.serialize());
-
     }
 
 

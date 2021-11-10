@@ -30,16 +30,21 @@ before(async () => {
 
 describe ('POST /todo',() => {
 
-    it ('should create a new todo with the title provided in the request body', async () => {
-        const res = await chai.request (expressApp).post ('/todo').send ({ title: 'test title' });
-        expect (res).to.have.status (201);
-        expect (res.body).to.have.property ('id');
-        expect (res.body).to.have.property ('title');
-    })
+  it ('should create a new todo with the title provided in the request body', async () => {
+    const res = await chai.request (expressApp).post ('/todo').send ({ title: 'test title' });
+    expect (res).to.have.status (201);
+    expect (res.body).to.have.property ('id');
+    expect (res.body).to.have.property ('title');
+  })
 
-    it ('should return validation error, if I try to add a task with no title', async () => {
-      const res = await chai.request (expressApp).post ('/todo').send ({ title: '' });
-      expect (res).to.have.status (400);
-    })
+  it ('should return validation error if no title is provided in the request body', async () => {
+    const res = await chai.request (expressApp).post ('/todo').send ({ title: '' });
+    expect (res).to.have.status (400);
+  })
+
+  it ('should return validation error if task with same title already exists', async () => {
+    const res = await chai.request (expressApp).post ('/todo').send ({ title: 'test title' });
+    expect (res).to.have.status (400);
+  })
 
 })

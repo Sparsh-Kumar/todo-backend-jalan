@@ -202,7 +202,6 @@ export class MongoStore implements IDataStore {
   private getModel<T extends BaseModel>(
     modelFactory: ModelFactory<T>,
   ): MongoosModel<Document> {
-
     if (modelFactory.getType () === Account) {
       return account;
     } else if (modelFactory.getType () === Todo) {
@@ -210,6 +209,5 @@ export class MongoStore implements IDataStore {
     } else {
       return null;
     }
-
   }
 }

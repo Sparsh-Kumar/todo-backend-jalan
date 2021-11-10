@@ -12,7 +12,8 @@
     "INVALID_LASTNAME": "Please specify last name.",
     "PASSWORD_MISSING": "Please provide a password.",
     "DUPLICATE_EMAIL": "The email you provided is already taken. Please provide a different one.",
-    "INVALID_TITLE_VALUE": "The title value cannot be empty."
+    "INVALID_TITLE_VALUE": "Please provide the title of the task.",
+    "DUPLICATE_TASK": "Please provide a different title for the task to be created."
   },
   "MESSAGES": {
     "HEALTHCHECK": "OK"

@@ -2,7 +2,6 @@
 import { Schema, model } from 'mongoose';
 
 /* creating the interface representing the document in MongoDB */
-
 interface Todo {
     title: string;
 }
@@ -10,13 +9,10 @@ interface Todo {
 /**
  * defining the todoSchema 
  */
-
 const todoSchema: Schema = new Schema <Todo> (
-
     {
         title: { type: String, required: true }
     },
-
     {
         collection: 'todos',
         timestamps: {
@@ -24,7 +20,6 @@ const todoSchema: Schema = new Schema <Todo> (
             updatedAt: 'updatedAt'
         }
     }
-
 );
 
 const todo = model('Todo', todoSchema);
