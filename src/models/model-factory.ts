@@ -1,6 +1,6 @@
 import { BaseModel } from './base-model';
 
 export type ModelFactory<T extends BaseModel> = {
-  getType(): string;
+  getType(): any;
   create(json: any): T;
 };

@@ -1,4 +1,5 @@
 import account from './account';
+import todo from './todo';
 import config from 'config';
 import {
   connect,
@@ -8,7 +9,7 @@ import {
   Mongoose,
   Types,
 } from 'mongoose';
-import { Account, BaseModel, ModelFactory } from '@models';
+import { Account, BaseModel, ModelFactory, Todo } from '@models';
 import { IDataStore, QueryOptions, DeleteResult } from '@storage';
 import { LooseObject } from '@typings';
 
@@ -193,12 +194,22 @@ export class MongoStore implements IDataStore {
       });
   }
 
+  /** 
+   * comparing the Model function with the return of getType () 
+   * the getType is returning Model functions and has a return type of any
+   */
+
   private getModel<T extends BaseModel>(
     modelFactory: ModelFactory<T>,
   ): MongoosModel<Document> {
-    if (modelFactory.getType() === typeof Account) {
+
+    if (modelFactory.getType () === Account) {
       return account;
+    } else if (modelFactory.getType () === Todo) {
+      return todo;
+    } else {
+      return null;
     }
-    return null;
+
   }
 }
