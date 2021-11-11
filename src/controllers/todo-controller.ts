@@ -27,6 +27,7 @@ export class TodoController extends BaseController {
 
     private initializeRoutes() {
         this.router.post (`${this.basePath}`, createTodoValidator (this.appContext), this.createTodo);
+        this.router.get (`${this.basePath}`, this.getAllTasks);
     }
 
     private createTodo = async (
@@ -49,5 +50,23 @@ export class TodoController extends BaseController {
         return res.status(201).json(todo.serialize());
     }
 
+    private getAllTasks = async (
+        req: ExtendedRequest,
+        res: Response,
+        next: NextFunction
+    ) => {
+        const failures: ValidationFailure [] = Validation.extractValidationErrors (
+            req,
+        );
+        if (failures.length > 0) {
+            const valError = new Errors.ValidationError(
+                res.__('DEFAULT_ERRORS.VALIDATION_FAILED'),
+                failures
+            );
+            return next (valError);
+        }
+        const todos = await this.appContext.todoRepository.getAll ();
+        return res.status (200).json (todos.map (todo => todo.serialize ()));
+    }
 
 }
