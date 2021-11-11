@@ -105,7 +105,6 @@ describe ('GET /todo', () => {
 
     // Precondition Testing
     // There should be some todos in the database already
-
     initCount = await testAppContext.todoRepository.count ();
     if (!initCount) {
       await testAppContext.todoRepository.save (new Todo ({ title: 'first task' }));
