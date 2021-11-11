@@ -94,3 +94,35 @@ describe ('POST /todo',() => {
   })
 
 })
+
+
+describe ('GET /todo', () => {
+
+  let initCount;
+  let testCount;
+
+  it ('should return an array containing all tasks', async () => {
+
+    // Precondition Testing
+    // There should be some todos in the database already
+
+    initCount = await testAppContext.todoRepository.count ();
+    if (!initCount) {
+      await testAppContext.todoRepository.save (new Todo ({ title: 'first task' }));
+      await testAppContext.todoRepository.save (new Todo ({ title: 'second task' }));
+    }
+
+    // Perform Testing
+    const res = await chai.request (expressApp).get ('/todo');
+    expect (res).to.have.status (200);
+    expect (res.body).to.be.an ('array');
+    expect (res.body).to.have.length.above (0);
+    testCount = res.body.length;
+
+    // Postcondition check
+    // number of Docs in DB = number of Docs returned by api endpoint.
+    expect (initCount).to.eql (testCount);
+
+  })
+
+})
