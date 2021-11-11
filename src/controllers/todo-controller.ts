@@ -66,7 +66,7 @@ export class TodoController extends BaseController {
             return next (valError);
         }
         const todos = await this.appContext.todoRepository.getAll ();
-        return res.status (200).json (todos);
+        return res.status (200).json (todos.map (todo => todo.serialize ()));
     }
 
 }
