@@ -93,6 +93,13 @@ export class MongoStore implements IDataStore {
     options?: QueryOptions,
     modelFactory?: ModelFactory<T>,
   ): Promise<T> {
+
+    if (data._id && !Types.ObjectId.isValid (data._id)) {
+      return new Promise ((resolve, reject) => {
+        reject (new Error (`_id = ${data._id} is not a valid mongoose ID`));
+      })
+    }
+
     let result = this.getModel<T>(modelFactory).findOne(data);
 
     if (options && options.fieldsToSelect) {
