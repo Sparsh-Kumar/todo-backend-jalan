@@ -13,7 +13,8 @@
     "PASSWORD_MISSING": "Please provide a password.",
     "DUPLICATE_EMAIL": "The email you provided is already taken. Please provide a different one.",
     "INVALID_TITLE_VALUE": "Please provide the title of the task.",
-    "DUPLICATE_TASK": "Please provide a different title for the task to be created."
+    "DUPLICATE_TASK": "A Todo with this title already exists. Please provide a different title.",
+    "INVALID_TASK_ID": "Task Id is not a valid mongoose Id, Please provide a correct Id of the task in the request parameter."
   },
   "MESSAGES": {
     "HEALTHCHECK": "OK"
