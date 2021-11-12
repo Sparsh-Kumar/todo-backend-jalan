@@ -12,6 +12,7 @@ import { respositoryContext, testAppContext } from '../../mocks/app-context';
 
 import { AuthHelper } from '@helpers';
 import { App } from '@server';
+import _ from 'lodash';
 import { Todo } from '@models';
 
 chai.use(chaiHttp);
@@ -90,6 +91,74 @@ describe ('POST /todo',() => {
     // There should be only 1 task in Database having title 'test title'
     todo = await testAppContext.todoRepository.getAll ({ title });
     expect (todo).to.have.lengthOf (1);
+
+  })
+
+})
+
+
+describe ('PUT /todo/:id', () => {
+  
+  let todo: Todo;
+  let title = 'test title';
+  let updatedTitle = 'updated test title';
+
+  it ('should return the task with updated title', async () => {
+    
+    // Precondiion test
+    // There should already be a todo present in the database
+    todo = await testAppContext.todoRepository.save (new Todo ({ title }));
+
+    // Perform Testing
+    // Trying to change the title of the task.
+    const res = await chai.request (expressApp).put (`/todo/${todo._id}`).send ({ title: updatedTitle });
+    expect (res).to.have.status (200);
+    expect (res.body).to.have.property ('id');
+    expect (res.body).to.have.property ('title');
+
+    // Postcondition Testing
+    // The title of the task should get updated
+    todo = await testAppContext.todoRepository.findOne ({ _id: todo._id });
+    expect (todo.title).to.equal(updatedTitle)
+
+  })
+
+  it ('should return a not found error if task with provided id does not exist', async () => {
+
+    // Precondition
+    // delete the record if already exists with id '618e2ed3a15925a0428ef4dc'
+    todo = await testAppContext.todoRepository.findOne ({ _id: '618e2ed3a15925a0428ef4dc' });
+    if (!_.isEmpty (todo)) {
+      await testAppContext.todoRepository.deleteMany ({ _id: '618e2ed3a15925a0428ef4dc' });
+    }
+
+    // Perform Testing
+    // Trying to update the non existing todo
+    const res = await chai.request (expressApp).put (`/todo/618e2ed3a15925a0428ef4dc`).send ({ title: updatedTitle });
+    expect (res).to.have.status (404);
+
+    // Post condition Testing
+    // Checking if no todos are present with id '618e2ed3a15925a0428ef4dc' in database
+    todo = await testAppContext.todoRepository.findOne ({ _id: '618e2ed3a15925a0428ef4dc' });
+    expect (JSON.stringify(todo)).to.equal ('{}');
+
+  })
+
+  it ('should return a validation error if no title is specified in request', async () => {
+
+    // Precondition
+    // There should be a task already in the database
+    todo = await testAppContext.todoRepository.save (new Todo ({ title }));
+
+    // Perform Testing
+    // Trying to update the todo item title with empty title
+    const res = await chai.request (expressApp).put (`/todo/${todo._id}`).send ({ title: '' });
+    expect (res).to.have.status (400);
+
+    // Postcondition Testing
+    // Task title should not get updated
+    todo = await testAppContext.todoRepository.findOne ({ _id: todo._id });
+    expect (todo.title).to.equal (title);
 
   })
 

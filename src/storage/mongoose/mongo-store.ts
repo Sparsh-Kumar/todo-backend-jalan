@@ -194,6 +194,10 @@ export class MongoStore implements IDataStore {
       });
   }
 
+  public isValidId (id: string): boolean {
+    return Types.ObjectId.isValid (id);
+  }
+  
   /** 
    * comparing the Model function with the return of getType () 
    * the getType is returning Model functions and has a return type of any

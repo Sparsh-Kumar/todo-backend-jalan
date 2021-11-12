@@ -37,6 +37,10 @@ export class BaseRepository<T> {
   public toObjectId(id: string): any {
     return this.context.store.toObjectId(id);
   }
+  
+  public isValidId (id: string): boolean {
+    return this.context.store.isValidId (id);
+  }
 
   public count(data?: LooseObject): Promise<number> {
     return this.context.store.count(data, this.modelFactory());
