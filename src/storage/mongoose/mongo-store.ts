@@ -187,18 +187,17 @@ export class MongoStore implements IDataStore {
     modelFactory?: ModelFactory<T>,
   ): Promise<DeleteResult> {
 
-    if (filter._id && !Types.ObjectId.isValid (filter._id)) {
-      return new Promise ((resolve, reject) => {
-        reject (new Error (`Unprocessable Entity in _id`));
-      })
-    }
-
     return this.getModel<T>(modelFactory)
       .deleteMany(filter)
       .exec()
       .then((result) => {
         return { success: true, deletedCount: result.deletedCount };
       });
+  }
+
+  /** method to check if an Id is a valid mongoose Id or not */
+  public isValidId (id: string): boolean {
+    return Types.ObjectId.isValid (id);
   }
 
   /** 

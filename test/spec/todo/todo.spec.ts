@@ -120,7 +120,7 @@ describe ('DELETE /todo/:id', () => {
     // Perform Testing
     // Trying to delete a task providing invalid task Id
     const res = await chai.request (expressApp).delete (`/todo/itisinvalidid`);
-    expect (res).to.have.status (500);
+    expect (res).to.have.status (400);
   })
 
 })

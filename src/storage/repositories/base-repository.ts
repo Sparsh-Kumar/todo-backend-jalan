@@ -45,6 +45,10 @@ export class BaseRepository<T> {
   public deleteMany(filter: LooseObject): Promise<DeleteResult> {
     return this.context.store.deleteMany(filter, this.modelFactory());
   }
+  
+  public isValidId (id: string) {
+    return this.context.store.isValidId (id);
+  }
 
   protected modelFactory(): ModelFactory<T> {
     throw new Error('Not Implemented');
