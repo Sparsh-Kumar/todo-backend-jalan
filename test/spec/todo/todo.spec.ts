@@ -94,3 +94,33 @@ describe ('POST /todo',() => {
   })
 
 })
+
+describe ('DELETE /todo/:id', () => {
+  let title = 'deletion api test';
+  let todo;
+  it ('should delete the task, if task present in the database', async () => {
+    
+    // Precondition Test
+    // There should already be a task present in the database
+    todo = await testAppContext.todoRepository.save (new Todo ({ title }));
+
+    // Perform Testing
+    // Trying to delete the task using task Id
+    const res = await chai.request (expressApp).delete (`/todo/${todo._id}`);
+    expect (res).to.have.status (204);
+
+    // PostCondition Test
+    // The task should not present in DB now
+    todo = await testAppContext.todoRepository.findOne ({ _id:todo._id });
+    expect (JSON.stringify (todo)).to.equal ('{}');
+  })
+  
+  it ('should return a internal server error, if provided an invalid mongoose Object Id', async () => {
+
+    // Perform Testing
+    // Trying to delete a task providing invalid task Id
+    const res = await chai.request (expressApp).delete (`/todo/itisinvalidid`);
+    expect (res).to.have.status (500);
+  })
+
+})

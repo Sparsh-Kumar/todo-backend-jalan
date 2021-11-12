@@ -186,6 +186,13 @@ export class MongoStore implements IDataStore {
     filter: LooseObject,
     modelFactory?: ModelFactory<T>,
   ): Promise<DeleteResult> {
+
+    if (filter._id && !Types.ObjectId.isValid (filter._id)) {
+      return new Promise ((resolve, reject) => {
+        reject (new Error (`Unprocessable Entity in _id`));
+      })
+    }
+
     return this.getModel<T>(modelFactory)
       .deleteMany(filter)
       .exec()
@@ -199,7 +206,7 @@ export class MongoStore implements IDataStore {
    * the getType is returning Model functions and has a return type of any
    */
 
-  private getModel<T extends BaseModel>(
+   private getModel<T extends BaseModel>(
     modelFactory: ModelFactory<T>,
   ): MongoosModel<Document> {
     if (modelFactory.getType () === Account) {
