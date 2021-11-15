@@ -186,6 +186,7 @@ export class MongoStore implements IDataStore {
     filter: LooseObject,
     modelFactory?: ModelFactory<T>,
   ): Promise<DeleteResult> {
+
     return this.getModel<T>(modelFactory)
       .deleteMany(filter)
       .exec()
@@ -194,12 +195,17 @@ export class MongoStore implements IDataStore {
       });
   }
 
+  /** method to check if an Id is a valid mongoose Id or not */
+  public isValidId (id: string): boolean {
+    return Types.ObjectId.isValid (id);
+  }
+
   /** 
    * comparing the Model function with the return of getType () 
    * the getType is returning Model functions and has a return type of any
    */
 
-  private getModel<T extends BaseModel>(
+   private getModel<T extends BaseModel>(
     modelFactory: ModelFactory<T>,
   ): MongoosModel<Document> {
     if (modelFactory.getType () === Account) {
