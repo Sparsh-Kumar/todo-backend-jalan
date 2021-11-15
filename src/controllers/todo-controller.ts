@@ -15,6 +15,7 @@ import {
     createTodoValidator,
     deleteTodoValidator
 } from '@validators';
+import _ from 'lodash';
 
 export class TodoController extends BaseController {
   public basePath: string = '/todo';
@@ -67,7 +68,11 @@ export class TodoController extends BaseController {
       return next (valError);
     }
     const _id = req.params.id;
+    const todoExist = await this.appContext.todoRepository.findOne ({ _id });
+    if (_.isEmpty (todoExist)) {
+        return res.status (404).json ({ message: res.__('VALIDATION_ERRORS.TASK_NOT_EXIST') });
+    }
     const deletedTodo = await this.appContext.todoRepository.deleteMany ({ _id });
-    return res.status (204).json (deletedTodo);
+    return res.status (204);
   }
 }

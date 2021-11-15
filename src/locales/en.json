@@ -13,8 +13,9 @@
     "PASSWORD_MISSING": "Please provide a password.",
     "DUPLICATE_EMAIL": "The email you provided is already taken. Please provide a different one.",
     "INVALID_TITLE_VALUE": "Please provide the title of the task.",
-    "DUPLICATE_TASK": "Please provide a different title for the task to be created.",
-    "INVALID_ID": "The passed id is not a valid mongoose ObjectId, please provide a valid mongoose ObjectId."
+    "DUPLICATE_TASK": "Task with this title already exists, Please provide a different title for the task to be created.",
+    "INVALID_ID": "The passed id is not a valid mongoose ObjectId, please provide a valid mongoose ObjectId.",
+    "TASK_NOT_EXIST": "The task with this id does not exist, please provide a different id."
   },
   "MESSAGES": {
     "HEALTHCHECK": "OK"
